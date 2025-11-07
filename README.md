@@ -2,6 +2,9 @@
 
 A simple command-line task management application built in Python. Track your tasks, mark their progress, and stay organized without any external dependencies.
 
+This is a roadmap.sh project
+https://roadmap.sh/projects/task-tracker
+
 ## Features
 
 - Add, update, and delete tasks
