@@ -1,62 +1,142 @@
 # CLI Task Tracker
- Python CLI task tracker
 
+A simple command-line task management application built in Python. Track your tasks, mark their progress, and stay organized without any external dependencies.
 
-## Task Description
+## Features
 
-Task tracker is a project used to track and manage your tasks. In this task, you will build a simple command line interface (CLI) to track what you need to do, what you have done, and what you are currently working on. This project will help you practice your programming skills, including working with the filesystem, handling user inputs, and building a simple CLI application.
+- Add, update, and delete tasks
+- Mark tasks as in-progress or done
+- List all tasks or filter by status
+- Persistent storage using JSON
+- Clean, intuitive command-line interface
+- Error handling and validation
 
-## Requirements
+## Installation
 
-The application should run from the command line, accept user actions and inputs as arguments, and store the tasks in a JSON file. The user should be able to:
+No installation required! Just ensure you have Python 3.6+ installed on your system.
 
-- Add, Update, and Delete tasks
-- Mark a task as in progress or done
-- List all tasks
-- List all tasks that are done
-- List all tasks that are not done
-- List all tasks that are in progress
+## Usage
+
+Run the application using Python:
+
+```bash
+python main.py <command> [arguments]
+```
+
+### Available Commands
+
+#### Adding Tasks
+```bash
+python main.py add "Buy groceries"
+# Output: Task added successfully (ID: 1)
+
+python main.py add "Complete project documentation"
+# Output: Task added successfully (ID: 2)
+```
+
+#### Updating Tasks
+```bash
+python main.py update 1 "Buy groceries and cook dinner"
+# Output: Task 1 updated successfully.
+```
+
+#### Deleting Tasks
+```bash
+python main.py delete 1
+# Output: Task 1 deleted successfully.
+```
+
+#### Marking Task Status
+```bash
+# Mark as in progress
+python main.py mark-in-progress 2
+# Output: Task 2 marked as in-progress.
+
+# Mark as done
+python main.py mark-done 2
+# Output: Task 2 marked as done.
+```
+
+#### Listing Tasks
+```bash
+# List all tasks
+python main.py list
+
+# List only todo tasks
+python main.py list todo
+
+# List only in-progress tasks
+python main.py list in-progress
+
+# List only completed tasks
+python main.py list done
+```
 
 ### Task Properties
 
-Each task should have the following properties:
+Each task contains the following information:
 
-- id: A unique identifier for the task
-- description: A short description of the task
-- status: The status of the task (todo, in-progress, done)
-- createdAt: The date and time when the task was created
-- updatedAt: The date and time when the task was last updated
+- **id**: Unique identifier (auto-generated)
+- **description**: Task description
+- **status**: Current status (`todo`, `in-progress`, `done`)
+- **createdAt**: Creation timestamp (ISO format)
+- **updatedAt**: Last modification timestamp (ISO format)
 
-### Here are some constraints to guide the implementation:
+### Data Storage
 
-- You can use any programming language to build this project.
-- Use positional arguments in command line to accept user inputs.
-- Use a JSON file to store the tasks in the current directory.
-- The JSON file should be created if it does not exist.
-- Use the native file system module of your programming language to interact with the JSON file.
-- Do not use any external libraries or frameworks to build this project.
-- Ensure to handle errors and edge cases gracefully.
+Tasks are stored in a `tasks.json` file in the same directory as the script. The file is created automatically if it doesn't exist.
 
-## Example
+Example JSON structure:
+```json
+{
+  "1": {
+    "id": 1,
+    "description": "Buy groceries",
+    "status": "todo",
+    "createdAt": "2024-01-15T10:30:00.123456",
+    "updatedAt": "2024-01-15T10:30:00.123456"
+  }
+}
+```
+
+## Error Handling
+
+The application handles common errors gracefully:
+
+- Missing arguments
+- Invalid task IDs
+- Invalid status values
+- File system errors
+- JSON parsing errors
+
+## Examples
+
+Here's a complete workflow example:
 
 ```bash
-# Adding a new task
-task-cli add "Buy groceries"
-# Output: Task added successfully (ID: 1)
+# Add some tasks
+python main.py add "Write project proposal"
+python main.py add "Review code changes"
+python main.py add "Update documentation"
 
-# Updating and deleting tasks
-task-cli update 1 "Buy groceries and cook dinner"
-task-cli delete 1
+# Start working on a task
+python main.py mark-in-progress 1
 
-# Marking a task as in progress or done
-task-cli mark-in-progress 1
-task-cli mark-done 1
+# Complete a task
+python main.py mark-done 2
 
-# Listing all tasks
-task-cli list
+# Update a task description
+python main.py update 3 "Update documentation and README"
 
-# Listing tasks by status
-task-cli list done
-task-cli list todo
-task-cli list in-progress
+# List all tasks to see current status
+python main.py list
+
+# List only pending tasks
+python main.py list todo
 ```
+
+## Requirements
+
+- Python 3.6 or higher
+- No external dependencies required
+- Works on Windows, macOS, and Linux
